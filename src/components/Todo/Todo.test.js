@@ -4,35 +4,36 @@ import userEvent from "@testing-library/user-event";
 import Todo from "./index";
 
 describe("Todo testleri", () => {
-	let button, input;
+  let button, input;
 
-	beforeEach(() => {
-		render(<Todo />);
+  beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
+    render(<Todo />);
 
-		button = screen.getByText("Add");
-		input = screen.getByLabelText("Text");
-	});
+    button = screen.getByText("Add");
+    input = screen.getByLabelText("Text");
+  });
 
-	test("Varsayılan olarak verilen 3 nesne render edilmeli", () => {
-		const items = screen.getAllByText(/Item/i);
+  test("Varsayılan olarak verilen 3 nesne render edilmeli", () => {
+    const items = screen.getAllByText(/Item/i);
 
-		expect(items.length).toEqual(3);
-	});
+    expect(items.length).toEqual(3);
+  });
 
-	test("Input ve button dokümanda bulunmalı", () => {
-		expect(button).toBeInTheDocument();
-		expect(input).toBeInTheDocument();
-	});
+  test("Input ve button dokümanda bulunmalı", () => {
+    expect(button).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
+  });
 
-	test("Inputa string girilip butona basılınca listeye eklenmeli", () => {
-		// inputu doldur
-		const name = "Mehmet";
-		userEvent.type(input, name);
+  test("Inputa string girilip butona basılınca listeye eklenmeli", () => {
+    // inputu doldur
+    const name = "Mehmet";
+    userEvent.type(input, name);
 
-		// butona tıkla
-		userEvent.click(button);
+    // butona tıkla
+    userEvent.click(button);
 
-		// assertion
-		expect(screen.getByText(name)).toBeInTheDocument();
-	});
+    // assertion
+    expect(screen.getByText(name)).toBeInTheDocument();
+  });
 });
